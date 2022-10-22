@@ -129,7 +129,6 @@ resolve.fallback: { "stream": false }
 
 Create config-overrides.js in the root of your project folder with the content:
 
-````
 ```js
 const webpack = require("webpack")
 
@@ -155,7 +154,6 @@ module.exports = function override(config) {
   return config
 }
 ```
-````
 
 and replace scripts in package.json with the following to use react-app-rewired instead of react-scripts:
 
