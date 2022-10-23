@@ -51,6 +51,7 @@ const Child = () => {
     tokenBalance: 2,
     tokenMint: "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU"
   }])
+  const [connected, setConnected] = useState(false)
   const wallet = useAnchorWallet()
 
   const network = WalletAdapterNetwork.Devnet
@@ -93,13 +94,16 @@ const Child = () => {
       })
     });
     setUserSPLTokenAccounts(tempArr)
+    setConnected(true)
   }
 
   useEffect(() => {
     if (wallet?.publicKey) {
-      getUsersTokenAccounts(wallet.publicKey)
       const SOL = connection.getAccountInfo(wallet.publicKey)
-      SOL.then((res) => setSOLBalance(res && res.lamports / LAMPORTS_PER_SOL))
+      SOL.then((res) => {
+        setSOLBalance(res && res.lamports / LAMPORTS_PER_SOL)
+        getUsersTokenAccounts(wallet.publicKey)
+      })
     }
   }, [wallet?.publicKey])
 
@@ -108,21 +112,17 @@ const Child = () => {
     console.log(userSPLTokenAccounts)
   }
 
-  if (wallet?.disconnected) {
-    setSOLBalance()
-    setUserSPLTokenAccounts([])
-    console.log("disconnected")
-  }
   console.log("wallet", wallet)
+  console.log("connected", connected)
   return (
     <>
-      {userSOLBalance && userSPLTokenAccounts.length > 0 ?
+      {wallet && connected ?
         <ConnectedUI
           userSOLBalance={userSOLBalance}
           userSPLTokenAccounts={userSPLTokenAccounts}
         /> :
         <div className="container">
-          <div className="wrapper align-center">
+          <div className="wrapper">
 
             <h1 className="title">Click here to connect Your Wallet</h1>
             <WalletMultiButton className="button" />
@@ -137,20 +137,21 @@ const Child = () => {
 const ConnectedUI = ({ userSOLBalance, userSPLTokenAccounts }) => {
   return (
     <div className="container">
-      <div className="wrapper">
+      <div className="wrapper-connected">
         <div className='connected-btn'>
           <WalletMultiButton className="button" />
         </div>
         <>
           <h1 className="title">Your Balance</h1>
-          <button className="button">{userSOLBalance} Sol</button>
+          <button className="button">{userSOLBalance || 0} Sol</button>
         </>
         {userSPLTokenAccounts.length > 0 && (
           <>
             <h1 className="title">Other Tokens</h1>
-            {userSPLTokenAccounts.map((token, i) => (
-              <button className="button" key={i}>Amount: {token.tokenBalance} <br /> Mint: {token.tokenMint}</button>
-            ))}
+            {userSPLTokenAccounts.length > 0 &&
+              userSPLTokenAccounts.map((token, i) => (
+                <button className="button" key={i}>Amount: {token.tokenBalance} <br /> Mint: {token.tokenMint}</button>
+              ))}
           </>
         )}
       </div>
