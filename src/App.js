@@ -142,15 +142,16 @@ const ConnectedUI = ({ userSOLBalance, userSPLTokenAccounts }) => {
           <WalletMultiButton className="button" />
         </div>
         <>
-          <h1 className="title">Your Balance</h1>
+          <h1 className="title-centered">Your Balance</h1>
+          <h1 className="title">SOLANA:</h1>
           <button className="button">{userSOLBalance || 0} Sol</button>
         </>
         {userSPLTokenAccounts.length > 0 && (
           <>
-            <h1 className="title">Other Tokens</h1>
+            <h1 className="title">Other Tokens:</h1>
             {userSPLTokenAccounts.length > 0 &&
               userSPLTokenAccounts.map((token, i) => (
-                <button className="button" key={i}>Amount: {token.tokenBalance} <br /> Mint: {token.tokenMint}</button>
+                <div className="other-tokens-container" key={i}>Amount: {token.tokenBalance} <br /> Mint: {token.tokenMint}</div>
               ))}
           </>
         )}

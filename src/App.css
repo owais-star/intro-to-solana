@@ -21,6 +21,10 @@
   .title {
     font-size: 24px;
   }
+  .title-centered {
+    font-size: 28px;
+    text-align: center;
+  }
   
   .button {
     border-radius: 3px !important;
@@ -49,8 +53,16 @@
   .wrapper-connected::-webkit-scrollbar {
     display: none;
   }
-  
+
   .connected-btn {
     align-self: flex-end;
   }
 
+  .other-tokens-container {
+    border-radius: 3px !important;
+    border: none !important;
+    padding: 10px 20px !important;
+    font-weight: 500 !important;
+    background-color: #373737 !important;
+    color: #aaaaaa !important;
+  }
