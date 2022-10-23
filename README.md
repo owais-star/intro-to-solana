@@ -167,3 +167,61 @@ and replace scripts in package.json with the following to use react-app-rewired 
 ```
 
 we are done with the setup now we can connect our wallet.
+
+## using solana's faucet to get some test SOL
+
+Now we need some SOL to play around with the solana network, we can get some SOL from the solana's faucet by following the [Docs](https://docs.solana.com/wallet-guide/sending-and-receiving-sol#faucet) or we can use this simplified [Article](https://www.alchemy.com/overviews/solana-faucet) wallet to get some SOL.
+
+## paste these commands line by line in a new administrator cmd window to download the solana cli and install it.
+
+```bash
+curl https://release.solana.com/v1.10.32/solana-install-init-x86_64-pc-windows-msvc.exe --output C:\solana-install-tmp\solana-install-init.exe --create-dirs
+```
+
+now install it with this command
+
+```bash
+C:\solana-install-tmp\solana-install-init.exe v1.10.32
+```
+
+after installation you wil see press any key to continue, at this point close that terminal and open a new one and type the following command to check if the installation was successful.
+
+```bash
+solana --version
+```
+
+now to create a new wallet type the following command in the terminal
+
+```bash
+solana-keygen new
+solana-keygen new --no-outfile
+```
+
+it will ask for pass phrase and then it will generate a new wallet for you, it will also generate a new public key and a private key, keep the private key safe and don't share it with anyone.
+
+now we need to fund our wallet with some SOL, to do that we will use the solana's faucet, paste the following command in the terminal
+
+```bash
+solana airdrop 2 <RECIPIENT_ACCOUNT_ADDRESS> --url https://api.devnet.solana.com
+```
+
+replace the `<RECIPIENT_ACCOUNT_ADDRESS>` with your public key that you got from the previous command.
+in my case it is
+
+```text
+EAWk6nY2HFevpWaJvozcxzk7a53oV8U6vKu3MNJqMw53
+and
+DMWuJPZhubK5NepB84tAeJSrBQnZuMaAuFzQGefTa3Cu
+```
+
+so i used the first one to fund my wallet like so:
+
+```bash
+solana airdrop 2 EAWk6nY2HFevpWaJvozcxzk7a53oV8U6vKu3MNJqMw53 --url https://api.devnet.solana.com
+```
+
+you can also get sol in your test net or devnet wallet by using the [Solana's airdrop website](https://solfaucet.com/) just paste your public key and click on the airdrop button.
+
+get some other tokens from the [Solana's token list](https://spl.solana.com/token-list) and fund your wallet with them.
+
+get some usdc tokens from the [USDC Faucet](https://usdcfaucet.com/) and fund your wallet with them.

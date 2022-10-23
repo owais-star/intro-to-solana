@@ -16,10 +16,10 @@
   
   .wrapper {
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     flex-direction: column;
-    background-color: #202020;
-    border: 1px solid #373737;
+    background-color: #000;
+    border: 1px solid #fff;
     padding: 20px 50px;
     gap: 10px;
   }
@@ -37,3 +37,11 @@
     background-color: #373737 !important;
     color: #aaaaaa !important;
   }
+
+  .align-center {
+    align-items: center;
+  }
+  .connected-btn {
+    align-self: flex-end;
+  }
+
